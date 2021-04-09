@@ -32,4 +32,23 @@
         <input matInput type="number" [(ngModel)]="rateEuroDollarCustom" (change)="changeRate()">
       </mat-form-field>
   </div>
+    Historique
+    <table *ngIf="history?.length > 0" class="table table-sm table-striped">
+      <thead>
+          <tr>
+              <th scope="col">Taux réel</th>
+              <th scope="col">Taux saisi</th>
+              <th scope="col">Valeur initial</th>
+              <th scope="col">Valeur calculé</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let line of history">
+          <td>{{line.realRate}}</td>
+          <td>{{line.rateCustom}}</td>
+          <td>{{line.initial}}</td>
+          <td>{{line.calculated}}</td>
+        </tr>
+      </tbody>
+      </table>
 </div>

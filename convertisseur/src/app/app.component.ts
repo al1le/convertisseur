@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   euroToDollar:boolean;
   rateEuroDollarCustom:number;
   rateEuroDollarReal:number;
+  history: any[] = [];
   
   ngOnInit(): void {
     this.amountEuro = 1.1;
@@ -28,6 +29,16 @@ export class AppComponent implements OnInit{
       this.amountDollar = this.amountEuro*this.rateEuroDollar;
     } else {
       this.amountEuro = this.amountDollar / this.rateEuroDollar;
+    }
+    let historyLine = {
+      realRate: this.rateEuroDollarReal,
+      rateCustom: this.rateEuroDollarCustom,
+      initial: this.euroToDollar ? this.amountEuro + " €" : this.amountDollar + "$",
+      calculated: this.euroToDollar ? this.amountDollar + "$" : this.amountEuro + " €"
+    }
+    this.history.push(historyLine);
+    if(this.history.length > 5) {
+      this.history.shift();
     }
   }
 
