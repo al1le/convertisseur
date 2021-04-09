@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription, interval } from 'rxjs';
+import { getRandomString } from 'selenium-webdriver/safari';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,9 @@ export class AppComponent implements OnInit{
   rateEuroDollarCustom:number;
   rateEuroDollarReal:number;
   history: any[] = [];
+  subscription: Subscription;
+
+  
   
   ngOnInit(): void {
     this.amountEuro = 1.1;
@@ -22,7 +27,20 @@ export class AppComponent implements OnInit{
     this.rateEuroDollarCustom = this.rateEuroDollar;
     this.euroToDollar = true;
     this.amountDollar = this.amountEuro*this.rateEuroDollar;
+    const source = interval(3000);
+    this.subscription = source.subscribe(val => {
+      let rand = Math.random() * 0.05;
+      let positive = Math.random() > 0.5;
+      rand = positive? rand : rand*-1;
+      if(this.euroToDollar) {
+        this.amountEuro += rand;
+      } else {
+        this.amountDollar += rand;
+      }
+      this.convert();
+    })
   }
+
 
   convert() {
     if(this.euroToDollar) {
