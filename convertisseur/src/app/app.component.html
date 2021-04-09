@@ -1,1 +1,29 @@
-<h1>Convertisseur euro dollar</h1>
+<div class="margin-left">
+  <h1>Convertisseur euro dollar</h1>
+  <div>
+    Dollars vers Euro <mat-slide-toggle [(ngModel)]="euroToDollar">Euro vers dollar</mat-slide-toggle>
+  </div>
+  <div class="row margin-top">
+    <div *ngIf="euroToDollar" class="col-2">
+      <mat-form-field>
+        <mat-label>Euro</mat-label>
+        <input matInput type="number" [(ngModel)]="amountEuro">
+      </mat-form-field>
+    </div>
+    <div *ngIf="!euroToDollar" class="col-2">
+        <mat-form-field>
+          <mat-label>Dollar</mat-label>
+          <input matInput type="number" [(ngModel)]="amountDollar">
+        </mat-form-field>
+      </div>
+    <div class="col-1">
+      <button mat-raised-button color="primary" (click)="convert()">Convertir</button>
+    </div>
+    <div *ngIf="euroToDollar" class="col-1">
+      {{amountDollar}} $
+    </div>
+    <div *ngIf="!euroToDollar" class="col-1">
+        {{amountEuro}} €
+      </div>
+  </div>
+</div>
