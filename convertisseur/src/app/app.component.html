@@ -19,11 +19,17 @@
     <div class="col-1">
       <button mat-raised-button color="primary" (click)="convert()">Convertir</button>
     </div>
-    <div *ngIf="euroToDollar" class="col-1">
+    <div *ngIf="euroToDollar" class="col-2">
       {{amountDollar}} $
     </div>
-    <div *ngIf="!euroToDollar" class="col-1">
+    <div *ngIf="!euroToDollar" class="col-2">
         {{amountEuro}} €
       </div>
+  </div>
+  <div>
+      <mat-form-field>
+        <mat-label>Taux de change</mat-label>
+        <input matInput type="number" [(ngModel)]="rateEuroDollarCustom" (change)="changeRate()">
+      </mat-form-field>
   </div>
 </div>

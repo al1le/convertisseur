@@ -11,10 +11,14 @@ export class AppComponent implements OnInit{
   rateEuroDollar:number;
   amountDollar:number;
   euroToDollar:boolean;
+  rateEuroDollarCustom:number;
+  rateEuroDollarReal:number;
   
   ngOnInit(): void {
     this.amountEuro = 1.1;
-    this.rateEuroDollar = 1.19;
+    this.rateEuroDollarReal = 1.19;
+    this.rateEuroDollar = this.rateEuroDollarReal;
+    this.rateEuroDollarCustom = this.rateEuroDollar;
     this.euroToDollar = true;
     this.amountDollar = this.amountEuro*this.rateEuroDollar;
   }
@@ -23,7 +27,16 @@ export class AppComponent implements OnInit{
     if(this.euroToDollar) {
       this.amountDollar = this.amountEuro*this.rateEuroDollar;
     } else {
-      this.amountDollar = this.amountEuro / this.rateEuroDollar;
+      this.amountEuro = this.amountDollar / this.rateEuroDollar;
+    }
+  }
+
+  changeRate() {
+    let variation = ((this.rateEuroDollarReal - this.rateEuroDollarCustom) / this.rateEuroDollarCustom) * 100;
+    if(Math.abs(variation) > 2) {
+      this.rateEuroDollar = this.rateEuroDollarReal;
+    } else {
+      this.rateEuroDollar = this.rateEuroDollarCustom;
     }
   }
  }
